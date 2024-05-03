@@ -21,7 +21,8 @@ class CsvReportStrategyTest {
     private CsvUserReportStrategy csvUserReportStrategy;
 
     @Test
-    public void testGenerateReport() {
+    public void generateReport_GivenUsers_ReturnsNonEmptyReport() {
+        // Given
         User user1 = new User();
         user1.setId(1L);
         user1.setUsername("test1");
@@ -34,19 +35,29 @@ class CsvReportStrategyTest {
 
         List<User> users = Arrays.asList(user1, user2);
 
+        // When
         byte[] report = csvUserReportStrategy.generateReport(users);
 
+        // Then
         assertNotNull(report);
         assertTrue(report.length > 0);
     }
 
     @Test
-    public void testGetType() {
-        assertEquals(UserReportType.CSV, csvUserReportStrategy.getType());
+    public void getType_WhenCalled_ReturnsCsv() {
+        // Given & When
+        UserReportType reportType = csvUserReportStrategy.getType();
+
+        // Then
+        assertEquals(UserReportType.CSV, reportType);
     }
 
     @Test
-    public void testGetFileExtension() {
-        assertEquals(".csv", csvUserReportStrategy.getFileExtension());
+    public void getFileExtension_WhenCalled_ReturnsCsvExtension() {
+        // Given & When
+        String fileExtension = csvUserReportStrategy.getFileExtension();
+
+        // Then
+        assertEquals(".csv", fileExtension);
     }
 }

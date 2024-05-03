@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.example.block2.dto.RoleDto;
+import com.example.block2.entity.Role;
 import com.example.block2.services.BaseServiceTest;
 import com.example.block2.services.interfaces.RoleService;
 import com.example.block2.utils.RoleTestUtils;
@@ -68,14 +69,13 @@ class RoleControllerIntegrationTest extends BaseServiceTest {
         RoleDto roleDto = new RoleDto();
         roleDto.setRole("ROLE_UPDATED");
 
-        // Create a role with id 1
         RoleDto roleToBeUpdated = new RoleDto();
         roleToBeUpdated.setRole("ROLE_TO_BE_UPDATED");
-        roleService.createRole(roleToBeUpdated);
+        Role createdRole = roleService.createRole(roleToBeUpdated);
 
         HttpEntity<RoleDto> requestEntity = new HttpEntity<>(roleDto);
         ResponseEntity<RoleDto> response = restTemplate.exchange(
-                "http://localhost:" + port + "/api/v1/roles/1", HttpMethod.PUT, requestEntity, RoleDto.class);
+                "http://localhost:" + port + "/api/v1/roles/" + createdRole.getId(), HttpMethod.PUT, requestEntity, RoleDto.class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
@@ -83,11 +83,17 @@ class RoleControllerIntegrationTest extends BaseServiceTest {
     }
 
     @Test
-    public void testDeleteRole() {
-        // Assuming there is a role with id 1
-        ResponseEntity<Void> response = restTemplate.exchange(
-                "http://localhost:" + port + "/api/v1/roles/1", HttpMethod.DELETE, null, Void.class);
+    public void deleteRole_DeletesExistingRole_ReturnsNoContent() {
+        // Given
+        RoleDto roleDto = new RoleDto();
+        roleDto.setRole("ROLE_TO_BE_DELETED");
+        Role createdRole = roleService.createRole(roleDto);
 
+        // When
+        ResponseEntity<Void> response = restTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/roles/" + createdRole.getId(), HttpMethod.DELETE, null, Void.class);
+
+        // Then
         assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 }

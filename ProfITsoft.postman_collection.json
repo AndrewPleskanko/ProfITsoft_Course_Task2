@@ -21,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/user/_list",
+					"raw": "http://localhost:8080/api/v1/users/_list",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -29,7 +29,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"user",
+						"v1",
+						"users",
 						"_list"
 					]
 				}
@@ -47,12 +48,12 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/C:/Users/legen/Desktop/gg.json"
+							"src": "/C:/Users/legen/Desktop/block2/testData.json"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/user/upload",
+					"raw": "http://localhost:8080/api/v1/users/upload",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -60,7 +61,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"user",
+						"v1",
+						"users",
 						"upload"
 					]
 				}
@@ -86,7 +88,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"fullName\": \"TestUser\",\r\n  \"email\": \"testuser.doe@example.com\",\r\n  \"phone\": \"+1234567890\",\r\n  \"reportType\": \"\"\r\n}",
+					"raw": "{\r\n  \"fullName\": \"TestUser\",\r\n  \"email\": \"testuser.doe@example.com\",\r\n  \"phone\": \"+1234567890\",\r\n  \"reportType\": \"EXCEL\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -94,7 +96,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/user/_report",
+					"raw": "http://localhost:8080/api/v1/users/_report",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -102,7 +104,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"user",
+						"v1",
+						"users",
 						"_report"
 					]
 				}
@@ -116,7 +119,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"username\": \"TestUsermryyz vs\",\r\n  \"password\": \"testуrwhwrhw1\",\r\n  \"email\": \"testuser.doe@example.com\",\r\n  \"role\": {\r\n    \"id\": 1,\r\n    \"role\": \"ROLE_USER\"\r\n  }\r\n}",
+					"raw": "{\r\n  \"username\": \"hdsrsjsrhssrhae\",\r\n  \"password\": \"testуrwhwrhw1\",\r\n  \"email\": \"testuser.doe@example.com\",\r\n  \"role\": {\r\n    \"id\": 1,\r\n    \"role\": \"ROLE_USER\"\r\n  }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -124,7 +127,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/user",
+					"raw": "http://localhost:8080/api/v1/users",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -132,7 +135,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"user"
+						"v1",
+						"users"
 					]
 				}
 			},
@@ -153,7 +157,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/role",
+					"raw": "http://localhost:8080/api/v1/roles",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -161,7 +165,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"role"
+						"v1",
+						"roles"
 					]
 				}
 			},
@@ -174,7 +179,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"username\": \"user1\",\r\n    \"password\": \"password1\",\r\n    \"email\": \"user1@example.com\",\r\n    \"role\": {\r\n        \"id\": 1,\r\n        \"name\": \"ROLE_USER\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"id\": 20,\r\n    \"username\": \"user1\",\r\n    \"password\": \"password1\",\r\n    \"email\": \"user1@example.com\",\r\n    \"role\": {\r\n        \"id\": 1,\r\n        \"name\": \"ROLE_USER\"\r\n    }\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -182,7 +187,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/user/1",
+					"raw": "http://localhost:8080/api/v1/users/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -190,7 +195,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"user",
+						"v1",
+						"users",
 						"1"
 					]
 				}
@@ -203,7 +209,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/user/1",
+					"raw": "http://localhost:8080/api/v1/users/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -211,7 +217,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"user",
+						"v1",
+						"users",
 						"1"
 					]
 				}
@@ -224,7 +231,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/role",
+					"raw": "http://localhost:8080/api/v1/roles",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -232,7 +239,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"role"
+						"v1",
+						"roles"
 					]
 				}
 			},
@@ -244,7 +252,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/user/11",
+					"raw": "http://localhost:8080/api/v1/users/11",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -252,7 +260,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"user",
+						"v1",
+						"users",
 						"11"
 					]
 				}
@@ -274,7 +283,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/api/role/10",
+					"raw": "http://localhost:8080/api/v1/roles/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -282,8 +291,9 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"role",
-						"10"
+						"v1",
+						"roles",
+						"1"
 					]
 				}
 			},
@@ -295,7 +305,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/api/role/2",
+					"raw": "http://localhost:8080/api/v1/roles/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -303,7 +313,8 @@
 					"port": "8080",
 					"path": [
 						"api",
-						"role",
+						"v1",
+						"roles",
 						"2"
 					]
 				}

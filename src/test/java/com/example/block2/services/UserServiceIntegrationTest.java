@@ -33,8 +33,6 @@ import com.example.block2.utils.UserTestUtils;
 @SpringBootTest
 public class UserServiceIntegrationTest extends BaseServiceTest {
 
-    private User user1;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -62,7 +60,7 @@ public class UserServiceIntegrationTest extends BaseServiceTest {
         RoleDto roleAdminDto = RoleTestUtils.createRoleDto(2, "ROLE_ADMIN");
         Role roleAdmin = roleMapper.toEntity(roleAdminDto);
         roleUser = roleMapper.toEntity(roleUserDto);
-        user1 = new User("test1", "test123", "presF@gmail.com", roleUser);
+        new User("test1", "test123", "presF@gmail.com", roleUser);
         new User("test2", "test234", "test2@gmail.com", roleAdmin);
         UserTestUtils.createUserDto("john", "123", roleUser, "testUser@gmail.com");
         UserTestUtils.createUserDto("admin", "admin", roleAdmin, "testAdmin@gmail.com");

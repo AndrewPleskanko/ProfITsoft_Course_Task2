@@ -20,8 +20,10 @@ class ExcelReportStrategyTest {
     @Autowired
     private ExcelUserReportStrategy excelUserReportStrategy;
 
+
     @Test
-    public void testGenerateReport() {
+    public void generateReport_WithValidUsers_ReturnsNonEmptyReport() {
+        // Given
         User user1 = new User();
         user1.setId(1L);
         user1.setUsername("test1");
@@ -34,19 +36,29 @@ class ExcelReportStrategyTest {
 
         List<User> users = Arrays.asList(user1, user2);
 
+        // When
         byte[] report = excelUserReportStrategy.generateReport(users);
 
+        // Then
         assertNotNull(report);
         assertTrue(report.length > 0);
     }
 
     @Test
-    public void testGetType() {
-        assertEquals(UserReportType.EXCEL, excelUserReportStrategy.getType());
+    public void getType_WhenCalled_ReturnsExcel() {
+        // Given & When
+        UserReportType reportType = excelUserReportStrategy.getType();
+
+        // Then
+        assertEquals(UserReportType.EXCEL, reportType);
     }
 
     @Test
-    public void testGetFileExtension() {
-        assertEquals(".xlsx", excelUserReportStrategy.getFileExtension());
+    public void getFileExtension_WhenCalled_ReturnsXlsx() {
+        // Given & When
+        String fileExtension = excelUserReportStrategy.getFileExtension();
+
+        // Then
+        assertEquals(".xlsx", fileExtension);
     }
 }

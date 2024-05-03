@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Objects;
 
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
@@ -30,10 +28,7 @@ import com.example.block2.entity.Role;
 import com.example.block2.enums.UserReportType;
 import com.example.block2.mapper.RoleMapper;
 import com.example.block2.repositories.RoleRepository;
-import com.example.block2.utils.RoleTestUtils;
-import com.example.block2.utils.UserTestUtils;
 
-@Slf4j
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserControllerIntegrationTest {
 
@@ -68,9 +63,6 @@ class UserControllerIntegrationTest {
     @Test
     void createUser_CreatesNewUser_ReturnsCreatedUser() {
         // Given & When
-        log.info("------------------------------------------------------------------------------------");
-        log.info("Creating user: {}", userDto);
-        log.info("--------ggggggggg----------------------------------------------------------------------------");
 
         ResponseEntity<UserDto> response = restTemplate.postForEntity("/api/v1/users", userDto, UserDto.class);
 
@@ -103,7 +95,7 @@ class UserControllerIntegrationTest {
         Long createdUserId = Objects.requireNonNull(createdResponse.getBody()).getId();
 
         UserDto updateUserDto = new UserDto();
-        updateUserDto.setUsername("updatedUsername");
+        updateUserDto.setUsername("updatedUsername" + System.currentTimeMillis());
         updateUserDto.setPassword(userDto.getPassword());
         updateUserDto.setEmail(userDto.getEmail());
         updateUserDto.setRole(userDto.getRole());
@@ -116,7 +108,7 @@ class UserControllerIntegrationTest {
         // Then
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertEquals("updatedUsername", response.getBody().getUsername());
+        assertEquals(updateUserDto.getUsername(), response.getBody().getUsername());
         assertEquals(userDto.getEmail(), response.getBody().getEmail());
     }
 
