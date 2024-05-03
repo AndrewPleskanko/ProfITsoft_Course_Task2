@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Objects;
 
-import com.example.block2.dto.RoleDto;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ import com.example.block2.repositories.RoleRepository;
 import com.example.block2.utils.RoleTestUtils;
 import com.example.block2.utils.UserTestUtils;
 
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Slf4j
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserControllerIntegrationTest {
 
@@ -50,16 +50,34 @@ class UserControllerIntegrationTest {
 
     @BeforeEach
     void setup() {
-        Role role = new Role();
-        role.setId(1L);
-        role.setName("ROLE_USER");
-        roleRepository.save(role); // Save the role to the database
+        String roleName = "ROLE_USER";
+        Role role = roleRepository.findByName(roleName);
+        if (role == null) {
+            role = new Role();
+            role.setName(roleName);
+            roleRepository.save(role);
+        }
 
         userDto = new UserDto();
-        userDto.setUsername("testUser");
+        userDto.setUsername("testUser" + System.currentTimeMillis());
         userDto.setPassword("testPassword");
         userDto.setEmail("test@example.com");
         userDto.setRole(role);
+    }
+
+    @Test
+    void createUser_CreatesNewUser_ReturnsCreatedUser() {
+        // Given & When
+        log.info("------------------------------------------------------------------------------------");
+        log.info("Creating user: {}", userDto);
+        log.info("--------ggggggggg----------------------------------------------------------------------------");
+
+        ResponseEntity<UserDto> response = restTemplate.postForEntity("/api/v1/users", userDto, UserDto.class);
+
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(userDto.getUsername(), response.getBody().getUsername());
+        assertEquals(userDto.getRole().getName(), response.getBody().getRole().getName());
     }
 
     @Test
@@ -83,10 +101,15 @@ class UserControllerIntegrationTest {
         // Given
         ResponseEntity<UserDto> createdResponse = restTemplate.postForEntity("/api/v1/users", userDto, UserDto.class);
         Long createdUserId = Objects.requireNonNull(createdResponse.getBody()).getId();
-        userDto.setUsername("updatedUsername");
+
+        UserDto updateUserDto = new UserDto();
+        updateUserDto.setUsername("updatedUsername");
+        updateUserDto.setPassword(userDto.getPassword());
+        updateUserDto.setEmail(userDto.getEmail());
+        updateUserDto.setRole(userDto.getRole());
 
         // When
-        HttpEntity<UserDto> requestEntity = new HttpEntity<>(userDto);
+        HttpEntity<UserDto> requestEntity = new HttpEntity<>(updateUserDto);
         ResponseEntity<UserDto> response = restTemplate.exchange(
                 "/api/v1/users/" + createdUserId, HttpMethod.PUT, requestEntity, UserDto.class);
 
@@ -94,7 +117,7 @@ class UserControllerIntegrationTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals("updatedUsername", response.getBody().getUsername());
-        assertEquals("test@example.com", response.getBody().getEmail());
+        assertEquals(userDto.getEmail(), response.getBody().getEmail());
     }
 
     @Test

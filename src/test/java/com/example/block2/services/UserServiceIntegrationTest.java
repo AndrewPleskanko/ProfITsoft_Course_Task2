@@ -40,8 +40,10 @@ public class UserServiceIntegrationTest extends BaseServiceTest {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private RoleRepository roleRepository;
+
     @Autowired
     private UserServiceImpl userService;
 
