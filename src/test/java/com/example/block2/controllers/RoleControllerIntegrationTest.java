@@ -67,10 +67,10 @@ class RoleControllerIntegrationTest extends BaseServiceTest {
     void updateRole_UpdatesRoleFields_ReturnsUpdatedRole() {
         // Given
         RoleDto roleDto = new RoleDto();
-        roleDto.setRole("ROLE_UPDATED");
+        roleDto.setRole("ROLE_UPDATED_" + UUID.randomUUID());
 
         RoleDto roleToBeUpdated = new RoleDto();
-        roleToBeUpdated.setRole("ROLE_TO_BE_UPDATED");
+        roleToBeUpdated.setRole("ROLE_TO_BE_UPDATED_" + UUID.randomUUID());
         Role createdRole = roleService.createRole(roleToBeUpdated);
 
         HttpEntity<RoleDto> requestEntity = new HttpEntity<>(roleDto);

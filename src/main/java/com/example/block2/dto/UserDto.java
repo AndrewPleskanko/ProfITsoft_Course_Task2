@@ -1,6 +1,7 @@
 package com.example.block2.dto;
 
 import com.example.block2.entity.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,4 +31,9 @@ public class UserDto {
 
     @NotNull(message = "Role cannot be null")
     private Role role;
+
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
 }
