@@ -55,7 +55,7 @@ public class UserController {
         log.info("Received request to create user: {}", userDto);
         User user = userService.createUser(userDto);
 
-        return new ResponseEntity<>(userMapper.toDto(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userMapper.toSafeDto(user), HttpStatus.CREATED);
     }
 
     @Operation(summary = "Get a user",
@@ -71,7 +71,7 @@ public class UserController {
         log.info("Received request to get user with id: {}", id);
         User user = userService.getUser(id);
 
-        return ResponseEntity.ok(userMapper.toDto(user));
+        return ResponseEntity.ok(userMapper.toSafeDto(user));
     }
 
     @Operation(summary = "Update a user",
@@ -88,7 +88,7 @@ public class UserController {
         log.info("Received request to update user with id: {}", id);
         User user = userService.updateUser(id, userDto);
 
-        return ResponseEntity.ok(userMapper.toDto(user));
+        return ResponseEntity.ok(userMapper.toSafeDto(user));
     }
 
     @Operation(summary = "Delete a user",

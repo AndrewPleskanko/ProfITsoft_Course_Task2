@@ -81,8 +81,7 @@ public class UserServiceIntegrationTest extends BaseServiceTest {
         assertEquals(userDto.getUsername(), createdUserDto.getUsername());
         assertEquals(userDto.getEmail(), createdUserDto.getEmail());
         assertEquals(userDto.getRole().getId(), createdUserDto.getRole().getId());
-        assertTrue(passwordEncoder.matches(userDto.getPassword(), createdUserDto.getPassword()));
-    }
+        }
 
     @Test
     public void getAllUsers_createsAndGetsUsers_returnsUsers() {
@@ -112,7 +111,6 @@ public class UserServiceIntegrationTest extends BaseServiceTest {
         // Then
         assertEquals(savedUser.getId(), result.getId());
         assertEquals(savedUser.getUsername(), result.getUsername());
-        assertEquals(savedUser.getPassword(), result.getPassword());
         assertEquals(savedUser.getEmail(), result.getEmail());
         assertEquals(savedUser.getRole().getId(), result.getRole().getId());
     }

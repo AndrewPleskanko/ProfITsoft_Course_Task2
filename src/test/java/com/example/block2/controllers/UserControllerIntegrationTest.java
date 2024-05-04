@@ -96,7 +96,7 @@ class UserControllerIntegrationTest {
 
         UserDto updateUserDto = new UserDto();
         updateUserDto.setUsername("updatedUsername" + System.currentTimeMillis());
-        updateUserDto.setPassword(userDto.getPassword());
+        updateUserDto.setPassword("newPassword");
         updateUserDto.setEmail(userDto.getEmail());
         updateUserDto.setRole(userDto.getRole());
 

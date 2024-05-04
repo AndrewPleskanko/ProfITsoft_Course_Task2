@@ -22,4 +22,10 @@ public interface UserMapper {
     @Mapping(source = "email", target = "email")
     @Mapping(source = "role", target = "role")
     User toEntity(UserDto userDto);
+
+    @Mapping(source = "username", target = "username")
+    @Mapping(source = "password", target = "password",ignore = true)
+    @Mapping(source = "email", target = "email")
+    @Mapping(source = "role", target = "role")
+    UserDto toSafeDto(User user);
 }
